@@ -1,9 +1,0 @@
-diff a/hello.html b/hello.html	(rejected hunks)
-@@ -7,7 +7,6 @@
- <body>
-   HTML/javascript<br>
-   Line added in Github
--  
-   Line added locally!
- 
- </body>
