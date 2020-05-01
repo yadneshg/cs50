@@ -1,3 +1,40 @@
+.para {
+  font-size: 25px;
+  font-family: Kunstler Script;
+  font-weight: bold;
+  border: 3px solid blue;
+  text-align: right;
+}
+
+table,
+th,
+td {
+  border: 2px solid green;
+  border-collapse: collapse;
+  padding: 5px;
+  text-align: center;
+}
+
+table {
+  width: 50%;
+  align-items: center;
+}
+
+th {
+  background-color: grey;
+}
+
+td {
+  background-color: lightgrey;
+}
+
+p {
+  color: blue;
+}
+
+span {
+  color: red;
+}
 h1, h3{
   color:darkblue;
   text-align:center;
