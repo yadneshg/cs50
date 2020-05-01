@@ -1,0 +1,23 @@
+h1, h3{
+  color:darkblue;
+  text-align:center;
+  background-position: left;
+  background-color: lightgrey;
+}
+h3{
+  text-align:left;
+}
+.demo {
+  color:red;
+  background-color: lightblue;
+  width: 200px;
+  height: 100px;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: bold;
+
+}
+#outer {
+  padding:20px;
+  margin-left: 20px;
+}
