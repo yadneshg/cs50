@@ -15,7 +15,6 @@
   <hr>
     <a href="{{ url_for('newmember')}}"> Register New Member</a>
 
-
     <button id="tshirtsize" onclick="visibleonclick()">Update T-Shirt size </button>
     <br><br>
   <div class="myDiv" style="visibility:hidden">
@@ -26,8 +25,8 @@
         {% endfor %}
       </select>
       <br><br>
-      <input type="number" name="tshirtsize" id="t_size" placeholder="T Shirt Size" autocomplete="off" autofocus><br><br>
-      <input type="number" name="tshirtnumber" id="t_number" placeholder="T Shirt Number" autocomplete="off" autofocus><br><br>
+      <input type="number" name="tshirtsize" id="t_size" placeholder="T-Shirt Size" autocomplete="off" autofocus><br><br>
+      <input type="number" name="tshirtnumber" id="t_number" placeholder="T-Shirt Number" autocomplete="off" autofocus><br><br>
       <input id="submit" type="submit" value="Update">
     </form>
   </div>

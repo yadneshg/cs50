@@ -18,15 +18,40 @@
 <script>
   var memberid = document.querySelector('#memberid');
   var memberid = memberid.innerHTML;
-
   function changeImage(memberid) {
-    var imagesrc = "<img src='/static/uploads/" + memberid + "." + "jpg'>";
+    var imagesrc = "<img src='/static/uploads/" + memberid + ".jpg'>";
     return imagesrc;
-  }
-
-  function myFunction(p1, p2) {
-    return p1 * p2;
   }
   document.getElementById("imageid").innerHTML = changeImage(memberid);
 </script>
+
+<h2>{{message}}</h2>
+<button id="updatemember" onclick="visibleonclick()" disabled>Update Member Details </button> Under Construction
+<br><br>
+
+
+<div class="myDiv" style="visibility:hidden">
+
+    <form action="{{url_for('forupdatemember')}}" method="post" name="form3" enctype=multipart/form-data>
+
+      ID : {{member.id}} <input type="hidden" id="updateid" name="updateid" value="{{member.id}}"/>
+
+      First Name : <input type="text" class="mm" name="updatefname" id="updatefname" value="{{ member.firstname }}" autocomplete="off" autofocus><br><br>
+      Last Name : <input type="tel" class="mm" name="updatelname" id="updatelname" value= "{{ member.lastname }}" autocomplete="off" autofocus><br><br>
+      Date of Birth : <input type="date" name="updatedob" id="updatedob" value="{{ member.dob }}"><br><br>
+      Upload Photo : <input type=file name=file><br><br>
+      <button id="regstermember" type="submit" value="Register">Update</button>
+
+    </form>
+
+</div>
+
+
+<script>
+    function visibleonclick() {
+        document.querySelector('.myDiv').style.visibility = "visible";
+    }
+
+</script>
+
 {% endblock %}

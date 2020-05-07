@@ -5,7 +5,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker, session
 import os
 from werkzeug.utils import secure_filename
-import os.path
 
 UPLOAD_FOLDER = 'd:/cs50/flask/static/uploads'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
@@ -234,7 +233,6 @@ def registermember():
     if member is None:
         return render_template("resopnse.html", message="No Such Member.")
     mid=member.id
-
     if request.method == 'POST':
         if 'file' not in request.files:
             return redirect(request.url)
@@ -248,47 +246,3 @@ def registermember():
             dd=f"D:/cs50/flask/static/uploads/{mid}.jpg"
             os.rename(ff,dd)
     return render_template("registersuccess.html")
-
-@app.route("/forupdatemember",methods=["post","GET"])
-def forupdatemember():
-    fname = request.form.get("updatefname")
-    lname = request.form.get("updatelname")
-    dob = request.form.get("updatedob")
-    uid = request.form.get("updateid")
-
-    if request.method == 'POST':
-        if 'file' not in request.files:
-            return redirect(request.url)
-        file = request.files['file']
-        if file.filename == '':
-            return redirect(request.url)
-        if file:
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            ff=f"d:/cs50/flask/static/uploads/{filename}"
-            print(ff)
-            if os.path.exists(f'D:/cs50/flask/static/uploads/{uid}.jpg'):
-                print(True)
-                os.remove(f'D:/cs50/flask/static/uploads/{uid}.jpg')
-
-            dd=f"D:/cs50/flask/static/uploads/{uid}.jpg"
-            os.rename(ff,dd)
-
-    if fname == "":
-        message = "Please fill in your first name"
-        return render_template("memberdetails.html", message=message)
-    if lname == "":
-        message = "Please fill in your last name"
-        return render_template("memberdetails.html", message=message)
-    if dob == "":
-        message = "Please fill in your date of birth"
-        return render_template("memberdetails.html", message=message)
-    #Error in update Query
-    #db.execute("UPDATE members SET firstname= %s, lastname= %s, dob= %s WHERE id= %S",(fname, lname, dob, uid))
-    try:
-        db.commit()
-    except psycopg2.Error as e:
-        message = "Database error: " + e + "/n SQL: " + s
-        return render_template("response.html", message=message)
-
-    return render_template("updatesuccess.html")
