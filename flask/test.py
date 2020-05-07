@@ -1,29 +1,18 @@
-@app.route('/login/', methods=["GET","POST"])
-def login_page():
-    error = ''
-    try:
-        c, conn = connection()
-        if request.method == "POST":
-            data = c.execute("SELECT * FROM users WHERE username = (%s)",
-            thwart(request.form['username']))
+import os
+import shutil
+from os import path
 
-            data = c.fetchone()[2]
 
-        if sha256_crypt.verify(request.form['password'], data):
-            session['logged_in'] = True
-            session['username'] = request.form['username']
+def main():
+    # make a duplicate of an existing file
 
-            flash("You are now logged in")
-            return redirect(url_for("dashboard"))
+    if path.exists("guru99.txt"):
+        # get the path to the file in the current directory
+        src = path.realpath("guru99.txt");
 
-        else:
-            error = "Invalid credentials, try again."
+        # rename the original file
+        os.rename('guru99.txt', 'career.guru99.txt')
 
-        gc.collect()
 
-        return render_template("login.html", error=error)
-
-    except Exception as e:
-        #flash(e)
-        error = "Invalid credentials, try again."
-        return render_template("login.html", error = error)
+if __name__ == "__main__":
+ main()

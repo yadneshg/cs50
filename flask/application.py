@@ -1,11 +1,22 @@
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, flash
 import datetime
 import csv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker, session
+import os
+from werkzeug.utils import secure_filename
 
+UPLOAD_FOLDER = 'd:/cs50/flask/static/uploads'
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 
 engine = create_engine("postgresql://postgres:Cyber123@localhost:5432/postgres")
 db = scoped_session(sessionmaker(bind=engine))
@@ -46,8 +57,8 @@ def register():
     try:
         db.commit()
     except psycopg2.Error as e:
-        t_message = "Database error: " + e + "/n SQL: " + s
-        return render_template("register.html", message=t_message)
+        message = "Database error: " + e + "/n SQL: " + s
+        return render_template("register.html", message=message)
 
     message = "Your user account has been added. click on Login for logging in."
     return render_template("register.html", message=message)
@@ -93,8 +104,13 @@ def book():
 
     db.execute("INSERT INTO passengers (name, flight_id) VALUES (:name, :flight_id)",
                {"name": name, "flight_id": flight_id})
-    db.commit()
-    return render_template("success.html")
+    try:
+        db.commit()
+    except psycopg2.Error as e:
+        message = "Database error: " + e + "/n SQL: " + s
+        return render_template("response.html", message=message)
+    message = "successfully Registered!!"
+    return render_template("response.html", message=message)
 
 @app.route("/flights")
 def flights():
@@ -123,7 +139,11 @@ def tshirtsize():
     number = request.form.get("tshirtnumber")
     db.execute("UPDATE members SET t_size = :t_size, t_number = :t_number WHERE id= :id",
                {"t_size": size, "t_number": number,"id":id })
-    db.commit()
+    try:
+        db.commit()
+    except psycopg2.Error as e:
+        message = "Database error: " + e + "/n SQL: " + s
+        return render_template("response.html", message=message)
     return render_template("tshirtsize.html", id=id, size=size, number=number)
 
 
@@ -176,8 +196,27 @@ def registermember():
 
     db.execute("INSERT INTO members (firstname, lastname, dob) VALUES (:fname, :lname, :dob)",
                {"fname": fname, "lname": lname, "dob": dob})
-    db.commit()
+    try:
+        db.commit()
+    except psycopg2.Error as e:
+        message = "Database error: " + e + "/n SQL: " + s
+        return render_template("response.html", message=message)
+
+    member = db.execute("SELECT id from members where firstname = :fname",
+                        {"fname": fname}).fetchone()
+    if member is None:
+        return render_template("resopnse.html", message="No Such Member.")
+    mid=member.id
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            return redirect(request.url)
+        file = request.files['file']
+        if file.filename == '':
+            return redirect(request.url)
+        if file:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            ff=f"d:/cs50/flask/static/uploads/{filename}"
+            dd=f"D:/cs50/flask/static/uploads/{mid}.jpg"
+            os.rename(ff,dd)
     return render_template("registersuccess.html")
-
-
-

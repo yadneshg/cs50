@@ -2,17 +2,44 @@
 {% block heading %}Member{% endblock %}
 
 {% block body %}
+
 <div>
+  <form action="{{url_for('registermember')}}" method="post" name="form2" enctype=multipart/form-data>
+    First Name : <input type="text" class="mm" name="memberfname" id="memberfname" placeholder="First Name" autocomplete="off" autofocus><br><br>
+    Last Name : <input type="tel" class="mm" name="memberlname" id="memberlname" placeholder="Last Name" autocomplete="off" autofocus><br><br>
+    Date of Birth : <input type="date" name="memberdob" id="memberdob" value="2000-01-01"><br><br>
+    Upload Photo : <input type=file name=file><br><br>
+    <button id="regstermember" type="submit" value="Register" onclick="myFunction()">Register</button>
 
-
-
-  <form action="{{url_for('registermember')}}" method="post" name="form2">
-    First Name : <input type="text" name="memberfname" id="memeberfname" placeholder="First Name" autocomplete="off" autofocus><br>
-    Last Name : <input type="tel" name="memberlname" id="memeberlname" placeholder="Last Name" autocomplete="off" autofocus><br>
-    Date of Birth : <input type="date" name="memberdob" id="memberdob"><br>
-
-    <input id="regstermember" type="submit" value="Register">
   </form>
-
 </div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+
+      // By default, submit button is disabled
+      document.querySelector('#regstermember').disabled = true;
+      document.getElementById("memberdob").defaultValue = "2000-01-01";
+      // Enable button only if there is text in the input field
+      document.querySelector('#memberfname').onkeyup = function() {
+          if ((document.querySelector('#memberfname').value.length > 0)&&(document.querySelector('#memberlname').value.length > 0))
+              document.querySelector('#regstermember').disabled = false;
+          else
+              document.querySelector('#regstermember').disabled = true;
+          }
+      document.querySelector('#memberlname').onkeyup = function() {
+          if ((document.querySelector('#memberfname').value.length > 0)&&(document.querySelector('#memberlname').value.length > 0))
+              document.querySelector('#regstermember').disabled = false;
+          else
+              document.querySelector('#regstermember').disabled = true;
+      };
+
+          // Clear input field and disable button again
+          //document.querySelector('#memberfname').value = '';
+          //document.querySelector('#memberlname').value = '';
+          //document.querySelector('#regstermember').disabled = true;
+          // Stop form from submitting
+          //return false;
+  });
+</script>
+
 {% endblock %}
