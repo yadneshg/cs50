@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>JavaScript</title>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelector('button').onclick = count;
+    })
+    let counter = 1950;
+
+    function count() {
+      counter++;
+      document.querySelector('#counter').innerHTML = counter;
+      if (counter % 10 == 0) {
+        alert(`counter is at ${counter}!`)
+      }
+    }
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      document.querySelector('#colors').onchange = function() {
+        document.querySelector('#changecolor').style.color = this.value;
+      }
+    })
+  </script>
+
+  <script>
+      document.addEventListener('DOMContentLoaded', () => {
+
+          document.querySelector('#submit').disabled = true;
+          document.querySelector('#task').onkeyup = () => {
+            if(document.querySelector('#task').value.length>0)
+              document.querySelector('#submit').disabled = false;
+            else {
+              document.querySelector('#submit').disabled = true;  
+            }
+          };
+          document.querySelector('#new-task').onsubmit = () => {
+              const li = document.createElement('li');
+              li.innerHTML = document.querySelector('#task').value;
+              document.querySelector('#tasks').append(li);
+              document.querySelector('#task').value = '';
+              document.querySelector('#submit').disabled = true;
+              return false;
+          };
+
+      });
+  </script>
+</head>
+
+
+<body>
+  <h1 id="counter">1950</h1>
+  <button>Click here</button><br>
+  <div id="changecolor">
+    <h1> Hello!!</h1>
+  </div>
+  <select name="colors" id="colors">
+    <option value="red">red</option>
+    <option value="blue">blue</option>
+    <option value="green">green</option>
+    <option value="magenta">magenta</option>
+    <option value="orange">orange</option>
+  </select>
+  <div>
+    <h1>Tasks</h1>
+    <ul id="tasks">
+    </ul>
+    <form id="new-task">
+        <input id="task" autocomplete="off" autofocus placeholder="New Task" type="text">
+        <input id="submit" type="submit">
+    </form>
+  </div>
+</body>
+
+</html>

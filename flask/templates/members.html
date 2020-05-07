@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+
+<h1>Members</h1>
+<ul>
+  {% for member in members %}
+  <li>
+    <a href="{{ url_for('memberdetails', member_id=member.id)}}">
+      {{ member.firstname }} {{ member.lastname }}
+    </a>
+  </li>
+  {% endfor %}
+  <hr>
+    <a href="{{ url_for('newmember')}}"> Register New Member</a>
+
+    <button id="tshirtsize" onclick="visibleonclick()">Update T-Shirt size </button>
+    <br><br>
+  <div class="myDiv" style="visibility:hidden">
+    <form action="{{url_for('tshirtsize')}}" method="post" name="form1">
+      <select name="member_id">
+        {% for member in members %}
+        <option value="{{member.id}}">{{member.id}}. {{member.firstname}} {{member.lastname}}</option>
+        {% endfor %}
+      </select>
+      <br><br>
+      <input type="number" name="tshirtsize" id="t_size" placeholder="T Shirt Size" autocomplete="off" autofocus><br><br>
+      <input type="number" name="tshirtnumber" id="t_number" placeholder="T Shirt Number" autocomplete="off" autofocus><br><br>
+      <input id="submit" type="submit" value="Update">
+    </form>
+  </div>
+
+
+  <script>
+        function visibleonclick() {
+            document.querySelector('.myDiv').style.visibility = "visible";
+        }
+
+  </script>
+  {% endblock %}

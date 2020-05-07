@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Web Page!</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <style>
+            .row > div {
+                padding: 20px;
+                background-color: teal;
+                border: 2px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+              <div class="col-3" style="background-color:white">
+                  <img src="logo.jpg" alt="Cycling Logo"width=20%> <span style="font-family: Matura MT Script Capitals"> Palghar Milers</span>
+              </div>
+                <div class="col-3">
+                    <a href="{{ url_for('newyear')}}">Check for New Year</a>
+                </div>
+                <div class="col-3">
+                    <a href="{{ url_for('members')}}">Member List </a>
+                </div>
+                <div class="col-3">
+                    <a href="{{ url_for('tshirt')}}">Submit your tshirt Size </a>
+                </div>
+
+            </div>
+        </div>
+    </body>
+</html>

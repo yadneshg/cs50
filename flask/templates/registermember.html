@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block heading %}Member{% endblock %}
+
+{% block body %}
+<div>
+
+
+
+  <form action="{{url_for('registermember')}}" method="post" name="form2">
+    First Name : <input type="text" name="memberfname" id="memeberfname" placeholder="First Name" autocomplete="off" autofocus><br>
+    Last Name : <input type="tel" name="memberlname" id="memeberlname" placeholder="Last Name" autocomplete="off" autofocus><br>
+    Date of Birth : <input type="date" name="memberdob" id="memberdob"><br>
+
+    <input id="regstermember" type="submit" value="Register">
+  </form>
+
+</div>
+{% endblock %}

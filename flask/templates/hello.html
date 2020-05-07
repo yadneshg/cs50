@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block heading %}Member{% endblock %}
+
+{% block body %}
+Hello, {{name}}!!! <br>
+T-Shirt Size = {{size}}  and <br>
+Number = {{number}}
+Thank You for submitting T Shirt Size!!!
+  <a href="{{ url_for('index')}}"> <h3>Home Page</h3></a>
+{% endblock %}

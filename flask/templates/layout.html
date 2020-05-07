@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Palghar Milers</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <style>
+              .row > div {
+                  padding: 5px;
+                  padding-left: 20px;
+                  background-color: teal;
+                  text-align: center;
+              }
+            .para {
+              font-size: 20px;
+              font-family: Lucida Handwriting;
+              font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+              <div class="col-2" style="background-color:white">
+                  <a href="{{ url_for('index')}}">
+                    <img src="/static/cyclinglogo.jpg" alt="aa" width=20%>
+                    <span style="font-family: Matura MT Script Capitals"> Palghar Milers</span>
+                  </a>
+              </div>
+                <div class="col-2">
+                    <a href="{{ url_for('newyear')}}">Check for New Year</a>
+                </div>
+                <div class="col-2">
+                    <a href="{{ url_for('members')}}">Member List </a>
+                </div>
+                <div class="col-2">
+                    <a href="{{ url_for('tshirt')}}">Submit your tshirt Size </a>
+                </div>
+                <div class="col-2">
+                    <a href="{{ url_for('airlines')}}">book a flight </a>
+                </div>
+                <div class="col-2">
+                    <a href="{{ url_for('logout')}}">Logout </a>
+                </div>
+                <br>
+                <div class="col-12" style="background-color:lavender; ">
+                    <span class="para">Until you step into the unknown, you don’t know what you are made of... !</span>
+                </div>
+
+            </div>
+        </div>
+        <h1>{% block heading %}{% endblock %}</h1>
+            {% block body %}
+            {% endblock %}
+
+    </body>
+</html>

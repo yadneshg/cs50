@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block heading %}{% endblock %}
+
+{% block body %}
+
+  {% if new_year %}
+    <h1>Yes, Happy New Year !!!</h1>
+  {% else %}
+    Today is {{now}} <br> <h1>It is not a New Year.</h1>
+    <br>
+    there are {{no_of_days_str1}} for new year!!
+  {% endif %}
+
+{% endblock %}

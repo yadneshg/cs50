@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <div class="container">
+    <h1>Login</h1>
+
+    <form action="{{url_for('index')}}" method='post'>
+      <label for="username"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="username" value="{{request.form.username}}" required>
+
+      <label for="password"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password" value="{{request.form.username}}" required>
+
+      {% if error %}
+        <p class='error'>{{error}}</p>
+      {% else %}
+        <input type="submit" value=Login>
+      {% endif %}
+    </form>
+
+
+  </div>
+{% endblock %}

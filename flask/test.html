@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+<head></head>
+  <style>
+  img {
+  width: 20%;
+  height: auto;
+}
+</style>
+
+<div id ="imageid"></div>
+  <script>
+    function changeImage(memberid)
+    {
+       var imagesrc= "<img src='"+ memberid + "."+"jpg'>";
+       return imagesrc;
+    }
+    function myFunction(p1, p2) {
+      return p1 * p2;
+    }
+    document.getElementById("imageid").innerHTML = changeImage(1);
+  </script>
+
+</body>
+</html>

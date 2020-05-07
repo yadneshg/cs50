@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block heading %}Flights{% endblock %}
+
+{% block body %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+
+      // By default, submit button is disabled
+      document.querySelector('#submit').disabled = true;
+
+      // Enable button only if there is text in the input field
+      document.querySelector('#name').onkeyup = function() {
+          if (document.querySelector('#name').value.length > 0)
+              document.querySelector('#submit').disabled = false;
+          else
+              document.querySelector('#submit').disabled = true;
+      };
+
+          // Clear input field and disable button again
+          document.querySelector('#name').value = '';
+          document.querySelector('#submit').disabled = true;
+          // Stop form from submitting
+          return false;
+
+  });
+</script>
+
+<form action="{{url_for('book')}}" method="post" name="form1" onsubmit="required()">
+  <select name="flight_id">
+    {% for flight in flights %}
+    <option value="{{flight.id}}">{{flight.id}}. {{flight.origin}} to {{flight.destination}}</option>
+    {% endfor %}
+  </select>
+
+  <h2>Book a Flight</h2>
+
+  <input type="text" name="name" id="name" placeholder="Passenger Name" autocomplete="off" autofocus>
+  <input id="submit" type="submit" value="Book">
+<hr>
+</form>
+<a href="{{url_for('flights')}}">All Flight Details</a>
+{% endblock %}
